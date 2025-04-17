@@ -1,15 +1,13 @@
-# 🧹 Word List Filter Script
+# Word List Filter Script
 
 This is a simple Node + TypeScript script that filters an English word list and outputs a cleaned `filteredWords.json` file. The result is ideal for use in word games like a Spelling Bee clone.
 
----
-
-## 📦 What It Does
+## What It Does
 
 - Loads a full dictionary (`words_dictionary.json`)
 - Filters for words that:
-  - Are **at least 4 letters long**
-  - Use only **lowercase alphabetic characters**
+  - Are at least 4 letters long
+  - Use only lowercase alphabetic characters
 - Outputs a clean JSON object:
 
   ```json
@@ -20,9 +18,7 @@ This is a simple Node + TypeScript script that filters an English word list and 
   }
   ```
 
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Install dependencies
 
@@ -33,7 +29,7 @@ npm install
 ### 2. Add a base dictionary
 
 Place a raw word list JSON file in the `scripts/` folder.  
-We recommend [`words_dictionary.json`](https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json) from the [dwyl/english-words](https://github.com/dwyl/english-words) repo.
+You can use [`words_dictionary.json`](https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json) from the [dwyl/english-words](https://github.com/dwyl/english-words) repository.
 
 ### 3. Run the script
 
@@ -45,7 +41,7 @@ This will generate a `filteredWords.json` file in the same directory.
 
 ### 4. Use the filtered word list
 
-Move `filteredWords.json` into your front-end project (e.g. `src/data/`) and import it:
+Move `filteredWords.json` into your front-end project (e.g. `src/data/`) and import it like this:
 
 ```ts
 import wordlist from "../data/filteredWords.json"
@@ -55,9 +51,7 @@ const isValidWord = (word: string): boolean => {
 }
 ```
 
----
-
-## 📁 File Structure
+## File Structure
 
 ```
 scripts/
@@ -66,8 +60,6 @@ scripts/
 ├── filterWords.ts              # Script file
 ```
 
----
+## License
 
-## 📜 License
-
-MIT – Do what you want!
+MIT – Free to use and modify.
