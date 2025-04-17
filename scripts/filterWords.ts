@@ -3,10 +3,16 @@ import path from "path"
 
 const raw = require("./words_dictionary.json")
 
+const badWordsPath = path.resolve(__dirname, "badwords.txt")
+const badWords = fs
+  .readFileSync(badWordsPath, "utf-8")
+  .split("\n")
+  .map((w) => w.trim().toLowerCase())
+
+const badWordsSet = new Set(badWords)
+
 const isValidWord = (word: string): boolean => {
-  return (
-    word.length >= 4 && /^[a-z]+$/.test(word) // only lowercase letters, no punctuation or caps
-  )
+  return word.length >= 4 && /^[a-z]+$/.test(word) && !badWordsSet.has(word)
 }
 
 const filteredWords: Record<string, true> = {}
