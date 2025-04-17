@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 
-const raw = require("../words_dictionary.json")
+const raw = require("./words_dictionary.json")
 
 const isValidWord = (word: string): boolean => {
   return (
@@ -19,7 +19,7 @@ for (const word in raw) {
 }
 
 fs.writeFileSync(
-  path.resolve(__dirname, "../filteredWords.json"),
+  path.resolve(__dirname, "./filteredWords.json"),
   JSON.stringify(filteredWords, null, 2)
 )
 
