@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import { whitelist } from "./whitelist"
 
 const raw = require("./words_dictionary.json")
 
@@ -8,11 +9,24 @@ const badWords = fs
   .readFileSync(badWordsPath, "utf-8")
   .split("\n")
   .map((w) => w.trim().toLowerCase())
+  .filter(Boolean)
 
-const badWordsSet = new Set(badWords)
+const badSet = new Set(badWords)
+
+const containsProfanity = (word: string): boolean => {
+  if (whitelist.has(word)) return false
+
+  for (const bad of badSet) {
+    if (word.includes(bad)) {
+      return true
+    }
+  }
+
+  return false
+}
 
 const isValidWord = (word: string): boolean => {
-  return word.length >= 4 && /^[a-z]+$/.test(word) && !badWordsSet.has(word)
+  return word.length >= 4 && /^[a-z]+$/.test(word) && !containsProfanity(word)
 }
 
 const filteredWords: Record<string, true> = {}
@@ -29,8 +43,5 @@ fs.writeFileSync(
   JSON.stringify(filteredWords, null, 2)
 )
 
-console.log(
-  `✅ Filtered word list saved. Total words: ${
-    Object.keys(filteredWords).length
-  }`
-)
+console.log(`✅ Filtered word list saved to filteredWords.json`)
+console.log(`Total valid words: ${Object.keys(filteredWords).length}`)
